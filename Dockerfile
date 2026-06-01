@@ -1,14 +1,14 @@
 # Build stage: build the Astro site against the production PocketBase URL.
 FROM node:22-alpine AS web
 WORKDIR /web
-COPY web/package.json web/package-lock.json* ./
-RUN npm ci
+COPY web/package.json web/pnpm-lock.yaml ./
+RUN corepack enable && pnpm install --frozen-lockfile
 COPY web/ ./
 ARG PUBLIC_PB_URL=https://marketplace.bigconfig.ai
 ENV PUBLIC_PB_URL=${PUBLIC_PB_URL}
 # Astro outputs to ../pocketbase/pb_public by default; override here for the
 # isolated build stage.
-RUN npm run build -- --outDir /out
+RUN pnpm run build -- --outDir /out
 
 # Runtime stage: Caddy + Litestream-supervised PocketBase + built static site.
 FROM alpine:3.20

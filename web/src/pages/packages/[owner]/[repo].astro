@@ -29,13 +29,10 @@ const pushed = pkg.pushed_at
     })
   : null;
 
-const usePrompt = `Use the BigConfig Package at ${pkg.github_url}.
-
-Generate a bb.edn that adds this package as a dependency and binds it to a Babashka task. Read the package documentation to discover the task name, required parameters, supported providers, and lifecycle commands.
-
-Ask me for every missing value before writing or running anything, including provider choices, regions, credentials, domains, and package-specific parameters.
-
-After I confirm the generated bb.edn, run the package lifecycle with bb <task> create, watch the output, and iterate on failures. Also tell me how to tear it down with the matching bb <task> delete command.`;
+const usePrompt = `- installer can be npx or uvx, ask me which one to use
+- language can be typescript, python, or clojure, ask me which one to use
+- run <installer> bc-pkg ${pkg.name}@<language> package validate
+- iterate on failure`;
 ---
 
 <Layout title={`${pkg.name} — BigConfig Marketplace`} description={pkg.description}>
@@ -98,7 +95,7 @@ After I confirm the generated bb.edn, run the package lifecycle with bb <task> c
             </button>
           </div>
           <p class="mt-3 text-sm text-neutral-400">
-            Give this prompt to your agent to generate the bb.edn, ask for
+            Give this prompt to your agent to create the local files, ask for
             missing values, and operate the package lifecycle.
           </p>
           <pre
