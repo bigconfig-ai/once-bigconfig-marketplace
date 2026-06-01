@@ -8,7 +8,7 @@ ARG PUBLIC_PB_URL=https://marketplace.bigconfig.ai
 ENV PUBLIC_PB_URL=${PUBLIC_PB_URL}
 # Astro outputs to ../pocketbase/pb_public by default; override here for the
 # isolated build stage.
-RUN pnpm run build -- --outDir /out
+RUN pnpm run build --outDir /out
 
 # Runtime stage: Caddy + Litestream-supervised PocketBase + built static site.
 FROM alpine:3.20
