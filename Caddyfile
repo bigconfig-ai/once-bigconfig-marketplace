@@ -1,13 +1,13 @@
-localhost {
+:{$CADDY_PORT} {
 	handle /_* {
-		reverse_proxy localhost:8090
+		reverse_proxy localhost:{$PB_PORT}
 	}
 
 	handle /api* {
-		reverse_proxy localhost:8090
+		reverse_proxy localhost:{$PB_PORT}
 	}
 
 	handle {
-		reverse_proxy localhost:4321
+		reverse_proxy localhost:{$WEB_PORT}
 	}
 }

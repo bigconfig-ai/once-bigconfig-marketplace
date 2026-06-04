@@ -1,3 +1,13 @@
+# Ports for the three dev processes. Incremental from PORT (default 5000)
+# so they stay predictable and collision-free.
+export PORT=${PORT:=5000}
+: ${PORT_STEP:=100}
+export PB_PORT=$PORT
+export WEB_PORT=$((PB_PORT + PORT_STEP))
+export CADDY_PORT=$((WEB_PORT + PORT_STEP))
+
+# Source the rest from the example (fill in your secrets)
+source_env_if_exists .envrc.private
 # Google OAuth credentials. Applied to the `_pb_users_auth_` collection on
 # every bootstrap by `pb_hooks/google_oauth.pb.js`; restart PocketBase after
 # rotating. If either is empty the hook logs and leaves the existing
