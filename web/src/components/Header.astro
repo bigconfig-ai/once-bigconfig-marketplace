@@ -6,9 +6,7 @@ const isActive = (href: string) =>
   href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
 ---
 
-<div
-  class="sticky top-0 z-50 border-b border-neutral-800/80 bg-neutral-950/85 backdrop-blur-md"
->
+<div class="sticky top-0 z-50 border-b bc-site-header backdrop-blur-md">
   <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a href="https://www.bigconfig.ai" aria-label="BigConfig" class="flex items-center">
       <img src={logo.src} alt="" class="h-7 w-auto" />
@@ -17,29 +15,29 @@ const isActive = (href: string) =>
       <a
         href="/"
         class:list={[
-          'transition hover:text-yellow-400',
-          isActive('/') ? 'text-yellow-400' : 'text-white',
+          'transition hover:text-amber-700',
+          isActive('/') ? 'text-amber-700' : 'text-slate-700',
         ]}>Marketplace</a
       >
       <a
         href="/packages"
         class:list={[
-          'transition hover:text-yellow-400',
-          isActive('/packages') ? 'text-yellow-400' : 'text-white',
+          'transition hover:text-amber-700',
+          isActive('/packages') ? 'text-amber-700' : 'text-slate-700',
         ]}>Packages</a
       >
       <a
         href="/applications"
         class:list={[
-          'transition hover:text-yellow-400',
-          isActive('/applications') ? 'text-yellow-400' : 'text-white',
+          'transition hover:text-amber-700',
+          isActive('/applications') ? 'text-amber-700' : 'text-slate-700',
         ]}>Applications</a
       >
       <a
         href="/documentation"
         class:list={[
-          'transition hover:text-yellow-400',
-          isActive('/documentation') ? 'text-yellow-400' : 'text-white',
+          'transition hover:text-amber-700',
+          isActive('/documentation') ? 'text-amber-700' : 'text-slate-700',
         ]}>Documentation</a
       >
     </nav>
@@ -49,7 +47,7 @@ const isActive = (href: string) =>
         type="button"
         data-menu-trigger="mobile"
         aria-label="Open menu"
-        class="flex items-center justify-center rounded-md p-1.5 text-neutral-400 transition hover:text-white md:hidden"
+        class="flex items-center justify-center rounded-md p-1.5 text-slate-500 transition hover:text-slate-950 md:hidden"
       >
         <svg data-hamburger-icon class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
@@ -63,42 +61,42 @@ const isActive = (href: string) =>
         <a
           href="/login"
           data-user-signin
-          class="rounded-full border border-neutral-700 px-4 py-2 text-sm font-semibold text-neutral-200 transition hover:border-neutral-500 hover:text-white"
+          class="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-yellow-500/60 hover:text-amber-700"
           >Sign in</a
         >
         <button
           type="button"
           data-menu-trigger="user"
           data-user-button
-          class="hidden items-center rounded-full border border-neutral-700 p-0.5 text-sm font-medium text-neutral-200 transition hover:border-neutral-500 hover:text-white"
+          class="hidden items-center rounded-full border border-slate-300 p-0.5 text-sm font-medium text-slate-700 transition hover:border-yellow-500/60 hover:text-amber-700"
         >
           <span
             data-user-avatar
-            class="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-neutral-700 text-xs font-semibold text-white"
+            class="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-slate-100 text-xs font-semibold text-slate-700"
           ></span>
         </button>
         <div
           data-menu-panel="user"
-          class="absolute right-0 mt-2 hidden w-48 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 shadow-lg"
+          class="absolute right-0 mt-2 hidden w-48 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg shadow-slate-900/10"
         >
           <a
             href="/me/packages"
             class:list={[
-              'block px-4 py-2.5 text-sm transition hover:bg-neutral-800 hover:text-yellow-400',
-              isActive('/me/packages') ? 'text-yellow-400' : 'text-neutral-200',
+              'block px-4 py-2.5 text-sm transition hover:bg-yellow-50 hover:text-amber-700',
+              isActive('/me/packages') ? 'text-amber-700' : 'text-slate-700',
             ]}>My packages</a
           >
           <a
             href="/me/applications"
             class:list={[
-              'block px-4 py-2.5 text-sm transition hover:bg-neutral-800 hover:text-yellow-400',
-              isActive('/me/applications') ? 'text-yellow-400' : 'text-neutral-200',
+              'block px-4 py-2.5 text-sm transition hover:bg-yellow-50 hover:text-amber-700',
+              isActive('/me/applications') ? 'text-amber-700' : 'text-slate-700',
             ]}>My applications</a
           >
           <button
             type="button"
             data-user-signout
-            class="block w-full border-t border-neutral-800 px-4 py-2.5 text-left text-sm text-neutral-200 transition hover:bg-neutral-800 hover:text-yellow-400"
+            class="block w-full border-t border-slate-200 px-4 py-2.5 text-left text-sm text-slate-700 transition hover:bg-yellow-50 hover:text-amber-700"
             >Sign out</button
           >
         </div>
@@ -108,71 +106,71 @@ const isActive = (href: string) =>
   <!-- mobile nav drawer -->
   <div
     data-menu-panel="mobile"
-    class="hidden border-t border-neutral-800 px-6 pb-4 md:hidden"
+    class="hidden border-t border-slate-200 px-6 pb-4 md:hidden"
   >
     <nav class="flex flex-col gap-1 pt-3 text-sm">
       <a
         href="/"
         class:list={[
-          'rounded-lg px-3 py-2 transition hover:bg-neutral-800 hover:text-yellow-400',
-          isActive('/') ? 'text-yellow-400' : 'text-white',
+          'rounded-lg px-3 py-2 transition hover:bg-yellow-50 hover:text-amber-700',
+          isActive('/') ? 'text-amber-700' : 'text-slate-700',
         ]}>Marketplace</a
       >
       <a
         href="/packages"
         class:list={[
-          'rounded-lg px-3 py-2 transition hover:bg-neutral-800 hover:text-yellow-400',
-          isActive('/packages') ? 'text-yellow-400' : 'text-white',
+          'rounded-lg px-3 py-2 transition hover:bg-yellow-50 hover:text-amber-700',
+          isActive('/packages') ? 'text-amber-700' : 'text-slate-700',
         ]}>Packages</a
       >
       <a
         href="/applications"
         class:list={[
-          'rounded-lg px-3 py-2 transition hover:bg-neutral-800 hover:text-yellow-400',
-          isActive('/applications') ? 'text-yellow-400' : 'text-white',
+          'rounded-lg px-3 py-2 transition hover:bg-yellow-50 hover:text-amber-700',
+          isActive('/applications') ? 'text-amber-700' : 'text-slate-700',
         ]}>Applications</a
       >
       <a
         href="/documentation"
         class:list={[
-          'rounded-lg px-3 py-2 transition hover:bg-neutral-800 hover:text-yellow-400',
-          isActive('/documentation') ? 'text-yellow-400' : 'text-white',
+          'rounded-lg px-3 py-2 transition hover:bg-yellow-50 hover:text-amber-700',
+          isActive('/documentation') ? 'text-amber-700' : 'text-slate-700',
         ]}>Documentation</a
       >
     </nav>
     <!-- mobile auth section -->
-    <div class="mt-2 border-t border-neutral-800 pt-3 text-sm">
+    <div class="mt-2 border-t border-slate-200 pt-3 text-sm">
       <a
         href="/login"
         data-mobile-signin
-        class="block rounded-lg px-3 py-2 font-semibold text-neutral-200 transition hover:bg-neutral-800 hover:text-white"
+        class="block rounded-lg px-3 py-2 font-semibold text-slate-700 transition hover:bg-yellow-50 hover:text-slate-950"
         >Sign in</a
       >
       <div data-mobile-user-section class="hidden flex-col gap-1">
         <div class="flex items-center gap-3 px-3 py-2">
           <span
             data-mobile-user-avatar
-            class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-neutral-700 text-xs font-semibold text-white"
+            class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-100 text-xs font-semibold text-slate-700"
           ></span>
         </div>
         <a
           href="/me/packages"
           class:list={[
-            'rounded-lg px-3 py-2 transition hover:bg-neutral-800 hover:text-yellow-400',
-            isActive('/me/packages') ? 'text-yellow-400' : 'text-neutral-200',
+            'rounded-lg px-3 py-2 transition hover:bg-yellow-50 hover:text-amber-700',
+            isActive('/me/packages') ? 'text-amber-700' : 'text-slate-700',
           ]}>My packages</a
         >
         <a
           href="/me/applications"
           class:list={[
-            'rounded-lg px-3 py-2 transition hover:bg-neutral-800 hover:text-yellow-400',
-            isActive('/me/applications') ? 'text-yellow-400' : 'text-neutral-200',
+            'rounded-lg px-3 py-2 transition hover:bg-yellow-50 hover:text-amber-700',
+            isActive('/me/applications') ? 'text-amber-700' : 'text-slate-700',
           ]}>My applications</a
         >
         <button
           type="button"
           data-mobile-signout
-          class="rounded-lg px-3 py-2 text-left text-neutral-200 transition hover:bg-neutral-800 hover:text-yellow-400"
+          class="rounded-lg px-3 py-2 text-left text-slate-700 transition hover:bg-yellow-50 hover:text-amber-700"
           >Sign out</button
         >
       </div>

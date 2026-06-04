@@ -17,12 +17,12 @@ const submitterName = app.expand?.submitter?.name || app.expand?.submitter?.id |
 <a
   href={`/applications/${owner}/${repo}`}
   class:list={[
-    'relative flex flex-col overflow-hidden rounded-2xl border p-8 transition',
+    'relative flex flex-col overflow-hidden rounded-2xl border p-8 shadow-sm shadow-slate-900/5 transition',
     highlighted
-      ? 'border-yellow-400/30 bg-yellow-400/5 hover:border-yellow-400/60 hover:bg-yellow-400/10'
+      ? 'border-yellow-300 bg-yellow-50/70 hover:border-yellow-400 hover:bg-yellow-50'
       : showType
-        ? 'border-cyan-400/25 bg-cyan-400/[0.04] hover:border-cyan-400/50 hover:bg-cyan-400/[0.07]'
-        : 'border-neutral-800 bg-neutral-900/40 hover:border-yellow-400/40 hover:bg-neutral-900',
+        ? 'border-yellow-200 bg-white/85 hover:border-yellow-400/70 hover:bg-white hover:shadow-lg hover:shadow-slate-900/10'
+        : 'border-slate-200 bg-white/85 hover:border-yellow-400/70 hover:bg-white hover:shadow-lg hover:shadow-slate-900/10',
   ]}
 >
   {
@@ -30,11 +30,11 @@ const submitterName = app.expand?.submitter?.name || app.expand?.submitter?.id |
       <>
         <div
           aria-hidden="true"
-          class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-300 to-teal-400"
+          class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-300 to-orange-500"
         />
         <div class="mb-4">
-          <span class="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2.5 py-1 text-[11px] font-semibold tracking-wider text-cyan-300 uppercase">
-            <span class="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+          <span class="inline-flex items-center gap-2 rounded-full border border-yellow-300/70 bg-yellow-100/80 px-2.5 py-1 text-[11px] font-semibold tracking-wider text-amber-700 uppercase">
+            <span class="h-1.5 w-1.5 rounded-full bg-yellow-400" />
             Application
           </span>
         </div>
@@ -43,18 +43,18 @@ const submitterName = app.expand?.submitter?.name || app.expand?.submitter?.id |
   }
   <div class="flex items-start justify-between gap-4">
     <div>
-      <h3 class="text-xl text-white">
+      <h3 class="text-xl text-slate-950">
         <span class="font-normal">{owner}</span>
-        <span class="text-neutral-500"> / </span>
+        <span class="text-slate-400"> / </span>
         <span class="font-semibold">{repo}</span>
       </h3>
-      <div class="mt-1 text-xs text-neutral-500">
+      <div class="mt-1 text-xs text-slate-500">
         added by {submitterName}
       </div>
     </div>
     {
       app.stars > 0 && (
-        <div class="flex items-center gap-1 text-xs text-neutral-400">
+        <div class="flex items-center gap-1 text-xs text-slate-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-3.5 w-3.5"
@@ -68,10 +68,10 @@ const submitterName = app.expand?.submitter?.name || app.expand?.submitter?.id |
       )
     }
   </div>
-  <p class="mt-4 flex-1 text-sm leading-relaxed text-neutral-400">
+  <p class="mt-4 flex-1 text-sm leading-relaxed text-slate-600">
     {app.description}
   </p>
-  <div class="mt-4 font-mono text-xs text-neutral-500 truncate">{app.docker_image}</div>
+  <div class="mt-4 truncate font-mono text-xs text-slate-500">{app.docker_image}</div>
   {
     app.tags && app.tags.length > 0 && (
       <div class="mt-5 flex flex-wrap gap-2">

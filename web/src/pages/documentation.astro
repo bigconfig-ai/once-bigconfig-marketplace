@@ -85,16 +85,16 @@ const agenticPoints = [
 <Layout title="Documentation — BigConfig Marketplace">
   <section class="mx-auto max-w-3xl px-6 pt-20 pb-12 text-center">
     <div
-      class="mb-4 inline-block text-xs font-semibold tracking-widest text-yellow-400 uppercase"
+      class="mb-4 inline-block text-xs font-semibold tracking-widest text-amber-600 uppercase"
     >
       Documentation
     </div>
-    <h1 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+    <h1 class="text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
       How the Marketplace fits together
     </h1>
-    <p class="mx-auto mt-4 max-w-xl text-neutral-400">
+    <p class="mx-auto mt-4 max-w-xl text-slate-600">
       A short tour of BigConfig SDK, BigConfig Launcher, BigConfig packages, the <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >once</code
       > package, ONCE, and ONCE applications — and how they combine to make
       this site work.
@@ -102,9 +102,9 @@ const agenticPoints = [
   </section>
 
   <nav class="mx-auto max-w-3xl px-6 pb-16">
-    <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
+    <div class="rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-6">
       <div
-        class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
+        class="mb-3 text-xs font-semibold tracking-wider text-slate-500 uppercase"
       >
         On this page
       </div>
@@ -114,7 +114,7 @@ const agenticPoints = [
             <li>
               <a
                 href={`#${s.id}`}
-                class="text-neutral-200 transition hover:text-yellow-400"
+                class="text-slate-700 transition hover:text-amber-700"
               >
                 {s.label}
               </a>
@@ -126,10 +126,10 @@ const agenticPoints = [
   </nav>
 
   <section id="agentic" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       Agentic by default
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
+    <p class="mt-6 leading-relaxed text-slate-600">
       BigConfig SDK and the package model are built so an LLM agent can do
       the work for you. Every artifact in the workflow — from the package
       configuration to the deployment commands — is something the agent reads,
@@ -139,9 +139,9 @@ const agenticPoints = [
     <div class="mt-8 grid gap-4 md:grid-cols-2">
       {
         agenticPoints.map((p) => (
-          <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
-            <h3 class="text-base font-semibold text-white">{p.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-400">
+          <div class="rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-6">
+            <h3 class="text-base font-semibold text-slate-950">{p.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">
               {p.body}
             </p>
           </div>
@@ -151,36 +151,36 @@ const agenticPoints = [
   </section>
 
   <section id="use-marketplace" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       How to use the Marketplace
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
+    <p class="mt-6 leading-relaxed text-slate-600">
       BigConfig Marketplace is a community directory of two kinds of
       entries — <a
         href="/packages"
-        class="text-yellow-400 hover:underline">BigConfig Packages</a
+        class="text-amber-600 hover:underline">BigConfig Packages</a
       >
       and
-      <a href="/applications" class="text-yellow-400 hover:underline"
+      <a href="/applications" class="text-amber-600 hover:underline"
         >ONCE applications</a
       >. You can browse anonymously; signing in with Google is only required
       to add a package or application to the directory.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       Every new entry starts in a <em>pending</em> state, visible only to
       its submitter on the <a
         href="/me/packages"
-        class="text-yellow-400 hover:underline">My packages</a
+        class="text-amber-600 hover:underline">My packages</a
       >
       and <a
         href="/me/applications"
-        class="text-yellow-400 hover:underline">My applications</a
+        class="text-amber-600 hover:underline">My applications</a
       > pages. Once an admin approves it, it lands in the public catalog and
       its GitHub metadata (description, stars, last push, OG image) is
       refreshed automatically — including a nightly job that keeps the
       counts current.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       To add a package, point the form at any public GitHub repository that
       contains a BigConfig package. To add a ONCE application, provide a
       publicly pullable Docker image reference. You do not need to be the
@@ -191,13 +191,13 @@ const agenticPoints = [
   </section>
 
   <section id="bigconfig" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       What is BigConfig SDK
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
+    <p class="mt-6 leading-relaxed text-slate-600">
       <a
         href="https://bigconfig.ai"
-        class="text-yellow-400 hover:underline"
+        class="text-amber-600 hover:underline"
         target="_blank"
         rel="noopener">BigConfig SDK</a
       > is the workflow and rendering library behind the BigConfig package
@@ -206,57 +206,57 @@ const agenticPoints = [
       so that you don't need to learn it yourself: an LLM agent can operate
       packages built on the SDK from a plain English description.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       The most radical design choice in the SDK is what it lacks:
-      <strong class="text-white">a dedicated CLI</strong>. Instead of
+      <strong class="text-slate-950">a dedicated CLI</strong>. Instead of
       shipping yet another binary, the SDK is consumed as a library. Each
       package author defines their own CLI surface in the package run file,
       and the <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       > launcher copies and invokes that file for the end user.
     </p>
   </section>
 
   <section id="bigconfig-launcher" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       What is BigConfig Launcher
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
-      <strong class="text-white">BigConfig Launcher</strong> is <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+    <p class="mt-6 leading-relaxed text-slate-600">
+      <strong class="text-slate-950">BigConfig Launcher</strong> is <code
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       >, the small bootstrap command that turns a public GitHub repository
       into a local, pinned package workspace. It is available on npm as
       <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       > and on PyPI as <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       >.
     </p>
     <pre
-      class="mt-4 overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-sm leading-relaxed"><code class="font-mono text-neutral-300">{launcherBootstrap}</code></pre>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+      class="bc-code-card mt-4 overflow-x-auto rounded-2xl p-6 text-sm leading-relaxed"><code class="font-mono">{launcherBootstrap}</code></pre>
+    <p class="mt-4 leading-relaxed text-slate-600">
       On the first run, the launcher pins the GitHub target, copies the
       package root <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >run</code
       > file into the current directory, and writes the local manifest needed
       to execute that language. The run file contains a default profile for
       the package, so your agent starts from a concrete working shape.
       Subsequent runs can omit the repo/ref and use the pinned target.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       The launcher itself is implemented in TypeScript and Python. There is
       no Clojure implementation of <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       >, but both launchers can launch Clojure target packages. The full
       <a
         href="https://bigconfig.ai/manual.html"
-        class="text-yellow-400 hover:underline"
+        class="text-amber-600 hover:underline"
         target="_blank"
         rel="noopener">BigConfig manual</a
       > covers SHA pinning, target detection, generated manifests, and other
@@ -265,89 +265,89 @@ const agenticPoints = [
   </section>
 
   <section id="bigconfig-package" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       What is a BigConfig Package
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
-      A <strong class="text-white">BigConfig Package</strong> is a public
+    <p class="mt-6 leading-relaxed text-slate-600">
+      A <strong class="text-slate-950">BigConfig Package</strong> is a public
       GitHub repository implemented in TypeScript, Python, or Clojure. Its
       entry point is a workflow authored with BigConfig SDK. The package
       author defines the lifecycle (<code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >create</code
       >, <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >delete</code
       >, <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >validate</code
       >, <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >describe</code
       >, and any custom steps), the providers it can target, and the
       parameters it exposes.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       The package shape is intentionally small: exactly one language
       manifest (<code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >package.json</code
       >, <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >pyproject.toml</code
       >, or <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >deps.edn</code
       >), a root <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >run</code
       > file containing a default profile, and package commands such as
       <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >package create</code
       >, <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >package delete</code
       >, <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >package validate</code
       >, and <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >package describe</code
       >.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       To use a package, bootstrap it with the launcher once. After that, the
       current directory is pinned to the selected repository and ref:
     </p>
     <pre
-      class="mt-4 overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-sm leading-relaxed"><code class="font-mono text-neutral-300">{launcherBootstrap}</code></pre>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+      class="bc-code-card mt-4 overflow-x-auto rounded-2xl p-6 text-sm leading-relaxed"><code class="font-mono">{launcherBootstrap}</code></pre>
+    <p class="mt-4 leading-relaxed text-slate-600">
       Then run the standardized lifecycle commands. We use <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >create</code
       > rather than <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >install</code
       > to reflect that infrastructure is actively provisioned during
       delivery, not just unpacked locally.
     </p>
     <pre
-      class="mt-4 overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-sm leading-relaxed"><code class="font-mono text-neutral-300">{packageLifecycle}</code></pre>
+      class="bc-code-card mt-4 overflow-x-auto rounded-2xl p-6 text-sm leading-relaxed"><code class="font-mono">{packageLifecycle}</code></pre>
   </section>
 
   <section id="once-package" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       What is the <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-amber-600"
         >Once</code
       > BigConfig Package
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
+    <p class="mt-6 leading-relaxed text-slate-600">
       <a
         href="/packages/bigconfig-ai/once"
-        class="text-yellow-400 hover:underline"><code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="text-amber-600 hover:underline"><code
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >Once</code
         ></a
       > is the BigConfig Package that turns any ONCE application into a
@@ -356,27 +356,27 @@ const agenticPoints = [
       configures Resend SMTP end-to-end (DKIM and SPF included), and runs
       Ansible playbooks to install Docker, the firewall, and TLS.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       The package is implemented across TypeScript, Python, and Clojure and
       exposes the same external command shape in each language. Choose the
       target you want, let <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       > bootstrap it, then operate the pinned workspace.
     </p>
     <pre
-      class="mt-4 overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-sm leading-relaxed"><code class="font-mono text-neutral-300">{onceLifecycle}</code></pre>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+      class="bc-code-card mt-4 overflow-x-auto rounded-2xl p-6 text-sm leading-relaxed"><code class="font-mono">{onceLifecycle}</code></pre>
+    <p class="mt-4 leading-relaxed text-slate-600">
       ONCE applications are supplied through the package's default profile
       in the root <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >run</code
       > file. Each application is described by a host plus a public Docker
       image:
     </p>
     <pre
-      class="mt-4 overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-sm leading-relaxed"><code class="font-mono text-neutral-300">{onceApplicationProfile}</code></pre>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+      class="bc-code-card mt-4 overflow-x-auto rounded-2xl p-6 text-sm leading-relaxed"><code class="font-mono">{onceApplicationProfile}</code></pre>
+    <p class="mt-4 leading-relaxed text-slate-600">
       The commands are agent-operable and reversible: there is no
       "configure manually after first boot" step, and tearing the
       deployment down leaves no orphaned resources behind.
@@ -384,21 +384,21 @@ const agenticPoints = [
   </section>
 
   <section id="once" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       What is ONCE
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
-      <strong class="text-white">ONCE</strong> is Basecamp's open-source
+    <p class="mt-6 leading-relaxed text-slate-600">
+      <strong class="text-slate-950">ONCE</strong> is Basecamp's open-source
       platform for installing and managing Docker-based web applications,
       with the explicit goal of making self-hosting as simple as possible.
       The codebase lives at <a
         href="https://github.com/basecamp/once"
         target="_blank"
         rel="noopener"
-        class="text-yellow-400 hover:underline">github.com/basecamp/once</a
+        class="text-amber-600 hover:underline">github.com/basecamp/once</a
       >.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       The tool bundles three things you would otherwise wire up yourself: a
       one-line installer that drops the binary onto the host (and Docker,
       if needed), a TUI dashboard for monitoring and operating each
@@ -406,7 +406,7 @@ const agenticPoints = [
       especially well-suited for AI agents. On top of that it provides
       automatic updates, backups, and system information.
     </p>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       ONCE runs on Linux and macOS, and is designed to work on whatever
       hardware fits the deployment — a physical server, a cloud VPS, a
       Raspberry Pi, or a laptop. Out of the box it ships with the
@@ -414,16 +414,16 @@ const agenticPoints = [
       image as well, including third-party apps and custom forks.
     </p>
     <div
-      class="mt-6 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-sm leading-relaxed text-neutral-300"
+      class="mt-6 rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-6 text-sm leading-relaxed text-slate-600"
     >
       <div
-        class="mb-2 text-xs font-semibold tracking-widest text-yellow-400 uppercase"
+        class="mb-2 text-xs font-semibold tracking-widest text-amber-600 uppercase"
       >
         At a glance
       </div>
       <ul class="list-disc space-y-1 pl-5">
         <li>One-line installer: <code
-            class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-xs text-yellow-400"
+            class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-amber-600"
             >curl https://get.once.com | sh</code
           >.</li>
         <li>TUI dashboard plus an agent-friendly CLI for day-2 operations.</li>
@@ -432,45 +432,45 @@ const agenticPoints = [
         <li>37signals apps included; any compatible Docker image works.</li>
       </ul>
     </div>
-    <p class="mt-6 leading-relaxed text-neutral-300">
+    <p class="mt-6 leading-relaxed text-slate-600">
       What ONCE deliberately leaves outside its scope is the host itself —
       the cloud account, the server, the DNS records, the SMTP credentials,
       the firewall. That is exactly the gap the BigConfig <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >once</code
       > package fills, and where your agent does the work for you.
     </p>
   </section>
 
   <section id="once-application" class="mx-auto max-w-3xl px-6 pb-20">
-    <h2 class="text-3xl font-semibold tracking-tight text-white">
+    <h2 class="text-3xl font-semibold tracking-tight text-slate-950">
       What is a ONCE application
     </h2>
-    <p class="mt-6 leading-relaxed text-neutral-300">
-      A <strong class="text-white">ONCE application</strong> is a Docker
+    <p class="mt-6 leading-relaxed text-slate-600">
+      A <strong class="text-slate-950">ONCE application</strong> is a Docker
       container that follows a small contract:
     </p>
     <ul
-      class="mt-4 list-disc space-y-2 pl-6 leading-relaxed text-neutral-300"
+      class="mt-4 list-disc space-y-2 pl-6 leading-relaxed text-slate-600"
     >
       <li>
         It serves HTTP on port <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >80</code
         >.
       </li>
       <li>
         It exposes a <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >/up</code
         > healthcheck endpoint (returning <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >200 OK</code
         > when the app is ready).
       </li>
       <li>
         It persists all state under <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >/storage</code
         >, which the host mounts as a durable volume.
       </li>
@@ -479,10 +479,10 @@ const agenticPoints = [
         public registry).
       </li>
     </ul>
-    <p class="mt-4 leading-relaxed text-neutral-300">
+    <p class="mt-4 leading-relaxed text-slate-600">
       That's the whole shape. Any image that conforms can be deployed by
       the <code
-        class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+        class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >once</code
       > package, listed in this marketplace as a ONCE application, and
       operated by an agent.
@@ -494,34 +494,34 @@ const agenticPoints = [
       class="rounded-3xl border border-yellow-400/30 bg-yellow-400/5 p-10 md:p-12"
     >
       <div
-        class="mb-3 text-xs font-semibold tracking-widest text-yellow-400 uppercase"
+        class="mb-3 text-xs font-semibold tracking-widest text-amber-600 uppercase"
       >
         It's turtles all the way down
       </div>
-      <h2 class="text-2xl font-semibold tracking-tight text-white md:text-3xl">
+      <h2 class="text-2xl font-semibold tracking-tight text-slate-950 md:text-3xl">
         BigConfig Marketplace is itself a ONCE application.
       </h2>
-      <p class="mt-4 leading-relaxed text-neutral-300">
+      <p class="mt-4 leading-relaxed text-slate-600">
         This site is a single Docker image bundling a PocketBase backend
         with a static Astro frontend served from <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >pb_public</code
         >. It serves HTTP on <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >:80</code
         >, exposes <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >/up</code
         >, and stores its database under <code
-          class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
           >/storage</code
         > — exactly the contract above.
       </p>
-      <p class="mt-4 leading-relaxed text-neutral-300">
+      <p class="mt-4 leading-relaxed text-slate-600">
         It's deployed using the BigConfig <a
           href="/packages/bigconfig-ai/once"
-          class="text-yellow-400 hover:underline"><code
-            class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
+          class="text-amber-600 hover:underline"><code
+            class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
             >once</code
           ></a
         > package — the same package this Marketplace catalogs.

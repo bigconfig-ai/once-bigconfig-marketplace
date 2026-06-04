@@ -1,10 +1,136 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  :root {
+    color-scheme: light;
+    --bc-bg: #f8fafc;
+    --bc-bg-soft: #f1f5f9;
+    --bc-surface: #ffffff;
+    --bc-surface-muted: #f8fafc;
+    --bc-border: #e2e8f0;
+    --bc-text: #0f172a;
+    --bc-text-muted: #475569;
+    --bc-text-subtle: #64748b;
+    --bc-accent: #d97706;
+    --bc-accent-hover: #b45309;
+    --bc-yellow: #facc15;
+    --bc-yellow-hover: #fde047;
+    --bc-amber: #d97706;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+  }
+
+  input,
+  textarea,
+  select {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
 }
 
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+@layer components {
+  .bc-page-light {
+    min-height: 100vh;
+    background: var(--bc-bg);
+    color: var(--bc-text);
+  }
+
+  .bc-page-glow {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    background: radial-gradient(ellipse at top, rgba(217, 119, 6, 0.11), transparent 62%);
+  }
+
+  .bc-page-glow-yellow {
+    background: radial-gradient(ellipse at top, rgba(250, 204, 21, 0.18), transparent 62%);
+  }
+
+  .bc-site-header {
+    border-color: rgb(226 232 240 / 0.86);
+    background: rgb(255 255 255 / 0.88);
+    box-shadow: 0 1px 0 rgb(15 23 42 / 0.03);
+  }
+
+  .bc-nav-link {
+    color: #334155;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  }
+
+  .bc-nav-link:hover,
+  .bc-nav-link:focus-visible,
+  .bc-nav-link-yellow:hover,
+  .bc-nav-link-yellow:focus-visible {
+    color: var(--bc-amber);
+  }
+
+  .bc-site-surface,
+  .bc-site-card,
+  .bc-code-card {
+    border: 1px solid var(--bc-border);
+    background: rgb(255 255 255 / 0.86);
+    box-shadow: 0 22px 50px rgb(15 23 42 / 0.06);
+  }
+
+  .bc-site-card {
+    transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  }
+
+  .bc-site-card:hover,
+  .bc-site-card-yellow:hover {
+    border-color: rgb(217 119 6 / 0.36);
+    background: var(--bc-surface);
+    box-shadow: 0 26px 60px rgb(15 23 42 / 0.09);
+  }
+
+  .bc-chip {
+    border: 1px solid var(--bc-border);
+    background: rgb(255 255 255 / 0.82);
+    color: var(--bc-text-muted);
+  }
+
+  .bc-muted {
+    color: var(--bc-text-muted);
+  }
+
+  .bc-subtle {
+    color: var(--bc-text-subtle);
+  }
+
+  .bc-code-card {
+    background: #f8fafc;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.8), 0 18px 44px rgb(15 23 42 / 0.06);
+  }
+
+  .bc-code-card code,
+  .bc-code-card pre {
+    color: #0f172a;
+  }
+
+  .bc-input-light {
+    border-color: #cbd5e1;
+    background: #ffffff;
+    color: #0f172a;
+  }
+
+  .bc-input-light::placeholder {
+    color: #94a3b8;
+  }
+
+  .bc-footer-link {
+    color: #0f172a;
+  }
+
+  .bc-footer-link:hover,
+  .bc-footer-link:focus-visible {
+    color: var(--bc-amber);
+  }
 }

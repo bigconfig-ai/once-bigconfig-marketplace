@@ -5,72 +5,72 @@ import { TAG_GROUPS } from '~/lib/tags';
 
 <Layout title="Edit package — BigConfig Marketplace">
   <section class="mx-auto max-w-3xl px-6 pt-20 pb-24">
-    <a href="/me/packages" class="text-sm text-neutral-400 hover:text-yellow-400"
+    <a href="/me/packages" class="text-sm text-slate-600 hover:text-amber-700"
       >← Back to my packages</a
     >
     <div class="mt-6">
       <div
-        class="mb-4 inline-block text-xs font-semibold tracking-widest text-yellow-400 uppercase"
+        class="mb-4 inline-block text-xs font-semibold tracking-widest text-amber-600 uppercase"
       >
         Edit
       </div>
-      <h1 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+      <h1 class="text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
         <span id="pkg-name">Package</span>
       </h1>
     </div>
 
     <div
       id="auth-gate"
-      class="mt-12 hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 p-10 text-center"
+      class="mt-12 hidden rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-10 text-center"
     >
-      <p class="text-neutral-300">Sign in to edit your packages.</p>
+      <p class="text-slate-600">Sign in to edit your packages.</p>
       <a
         href="/login"
-        class="mt-6 inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-neutral-950 hover:bg-yellow-300"
+        class="mt-6 inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-yellow-300"
         >Sign in</a
       >
     </div>
 
-    <div id="loading" class="mt-12 text-center text-neutral-500">Loading…</div>
+    <div id="loading" class="mt-12 text-center text-slate-500">Loading…</div>
     <div
       id="error"
-      class="mt-12 hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 p-10 text-center text-neutral-300"
+      class="mt-12 hidden rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-10 text-center text-slate-600"
     >
     </div>
 
     <form
       id="edit-form"
-      class="mt-12 hidden grid gap-5 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-8 md:p-10"
+      class="mt-12 hidden grid gap-5 rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-8 md:p-10"
     >
       <label class="block text-sm">
-        <span class="mb-2 block font-medium text-neutral-200">GitHub URL</span>
+        <span class="mb-2 block font-medium text-slate-700">GitHub URL</span>
         <input
           name="github_url"
           type="url"
           disabled
-          class="w-full rounded-lg border border-neutral-800 bg-neutral-950/50 px-4 py-3 text-neutral-400 outline-none"
+          class="w-full rounded-lg border border-slate-200 bg-slate-100 px-4 py-3 text-slate-600 outline-none"
         />
-        <span class="mt-1 block text-xs text-neutral-500"
+        <span class="mt-1 block text-xs text-slate-500"
           >URL is locked once added. Delete and add it again if you need a
           different repo.</span
         >
       </label>
       <label class="block text-sm">
-        <span class="mb-2 block font-medium text-neutral-200">Description</span>
+        <span class="mb-2 block font-medium text-slate-700">Description</span>
         <textarea
           name="description"
           rows="3"
-          class="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-4 py-3 text-white placeholder-neutral-500 outline-none focus:border-yellow-400"
+          class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 placeholder-slate-400 outline-none focus:border-yellow-400"
         ></textarea>
       </label>
       <div>
-        <span class="mb-2 block text-sm font-medium text-neutral-200">Tags</span
+        <span class="mb-2 block text-sm font-medium text-slate-700">Tags</span
         >
         <div class="space-y-3">
           {
             TAG_GROUPS.map((group) => (
               <div>
-                <div class="mb-1.5 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+                <div class="mb-1.5 text-xs font-semibold tracking-wider text-slate-500 uppercase">
                   {group.label}
                 </div>
                 <div class="flex flex-wrap gap-2">
@@ -82,7 +82,7 @@ import { TAG_GROUPS } from '~/lib/tags';
                         value={t}
                         class="peer sr-only"
                       />
-                      <span class="rounded-full bg-neutral-800/80 px-2.5 py-0.5 text-xs text-neutral-300 transition peer-checked:bg-yellow-400 peer-checked:text-neutral-950">
+                      <span class="rounded-full border border-slate-200 bg-white/80 px-2.5 py-0.5 text-xs text-slate-600 transition peer-checked:bg-yellow-400 peer-checked:text-slate-950">
                         {t}
                       </span>
                     </label>
@@ -96,19 +96,19 @@ import { TAG_GROUPS } from '~/lib/tags';
       <div class="flex flex-wrap gap-3">
         <button
           type="submit"
-          class="rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-yellow-300 disabled:opacity-60"
+          class="rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-yellow-300 disabled:opacity-60"
           >Save changes</button
         >
         <button
           type="button"
           id="delete-btn"
-          class="rounded-full border border-red-500/40 px-6 py-3 text-sm font-semibold text-red-300 transition hover:border-red-400 hover:bg-red-500/10"
+          class="rounded-full border border-red-300 px-6 py-3 text-sm font-semibold text-red-600 transition hover:border-red-400 hover:bg-red-50"
           >Delete package</button
         >
       </div>
       <p
         id="form-status"
-        class="hidden text-center text-sm text-neutral-400"
+        class="hidden text-center text-sm text-slate-600"
       >
       </p>
     </form>

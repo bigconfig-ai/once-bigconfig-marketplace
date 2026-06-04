@@ -11,41 +11,41 @@ const all = await fetchApprovedApplications();
   <section class="mx-auto max-w-6xl px-6 pt-20 pb-12">
     <div class="text-center">
       <div
-        class="mb-4 inline-block text-xs font-semibold tracking-widest text-yellow-400 uppercase"
+        class="mb-4 inline-block text-xs font-semibold tracking-widest text-amber-600 uppercase"
       >
         Applications
       </div>
       <h1
-        class="text-4xl font-semibold tracking-tight text-white md:text-5xl"
+        class="text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl"
       >
         ONCE apps
       </h1>
-      <p class="mx-auto mt-4 max-w-2xl text-neutral-400">
-        {all.length} community-built ONCE applications. Each is a Docker container that serves HTTP on :80, exposes /up, and stores data in /storage. Deploy with the <a href="/packages/bigconfig-ai/once" class="text-yellow-400 hover:underline">once</a> package.
+      <p class="mx-auto mt-4 max-w-2xl text-slate-600">
+        {all.length} community-built ONCE applications. Each is a Docker container that serves HTTP on :80, exposes /up, and stores data in /storage. Deploy with the <a href="/packages/bigconfig-ai/once" class="text-amber-600 hover:underline">once</a> package.
       </p>
     </div>
   </section>
 
   <section class="mx-auto max-w-6xl px-6 pb-12">
-    <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
+    <div class="rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-6">
       <input
         id="search-input"
         type="search"
         placeholder="Search by name or description…"
-        class="w-full rounded-lg border border-neutral-700 bg-neutral-950 px-4 py-3 text-white placeholder-neutral-500 outline-none focus:border-yellow-400"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 placeholder-slate-400 outline-none focus:border-yellow-400"
       />
       <div class="mt-6 space-y-4">
         {
           TAG_GROUPS.map((group) => (
             <div>
-              <div class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+              <div class="mb-2 text-xs font-semibold tracking-wider text-slate-500 uppercase">
                 {group.label}
               </div>
               <div class="flex flex-wrap gap-2">
                 {group.tags.map((t) => (
                   <button
                     type="button"
-                    class="tag-filter rounded-full bg-neutral-800/80 px-2.5 py-0.5 text-xs text-neutral-300 transition hover:bg-neutral-700 data-[active=true]:bg-yellow-400 data-[active=true]:text-neutral-950"
+                    class="tag-filter rounded-full border border-slate-200 bg-white/80 px-2.5 py-0.5 text-xs text-slate-600 transition hover:bg-slate-100 data-[active=true]:bg-yellow-400 data-[active=true]:text-slate-950"
                     data-tag={t}
                     data-active="false"
                   >
@@ -58,13 +58,13 @@ const all = await fetchApprovedApplications();
         }
       </div>
       <div class="mt-4 flex items-center justify-between">
-        <span id="result-count" class="text-xs text-neutral-500"
+        <span id="result-count" class="text-xs text-slate-500"
           >{all.length} applications</span
         >
         <button
           id="clear-filters"
           type="button"
-          class="text-xs text-neutral-400 underline hover:text-yellow-400"
+          class="text-xs text-slate-600 underline hover:text-amber-700"
           >Clear filters</button
         >
       </div>
@@ -74,11 +74,11 @@ const all = await fetchApprovedApplications();
   <section class="mx-auto max-w-6xl px-6 pb-24">
     {
       all.length === 0 ? (
-        <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-10 text-center text-neutral-400">
+        <div class="rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-10 text-center text-slate-600">
           <p>No applications yet — add the first directory entry.</p>
           <a
             href="/applications/submit"
-            class="mt-6 inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-neutral-950 hover:bg-yellow-300"
+            class="mt-6 inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-yellow-300"
           >
             Add an application
           </a>
@@ -100,7 +100,7 @@ const all = await fetchApprovedApplications();
     }
     <div
       id="empty-state"
-      class="hidden rounded-2xl border border-neutral-800 bg-neutral-900/40 p-10 text-center text-neutral-400"
+      class="hidden rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-10 text-center text-slate-600"
     >
       No applications match these filters.
     </div>

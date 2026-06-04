@@ -30,13 +30,13 @@ const totalCount = packageCount + applicationCount;
 <Layout title="BigConfig Marketplace — community packages & applications">
   <section class="mx-auto max-w-6xl px-6 pt-20 pb-28 text-center">
     <div
-      class="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-4 py-1.5 text-xs font-medium text-neutral-300"
+      class="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-1.5 text-xs font-medium text-slate-600"
     >
       <span class="h-1.5 w-1.5 rounded-full bg-yellow-400"></span>
       Community marketplace · BigConfig packages & ONCE applications
     </div>
     <h1
-      class="mx-auto max-w-4xl text-5xl font-semibold tracking-tight text-white md:text-7xl"
+      class="mx-auto max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 md:text-7xl"
     >
       BigConfig<br />
       <span
@@ -44,7 +44,7 @@ const totalCount = packageCount + applicationCount;
         >Marketplace</span
       >
     </h1>
-    <p class="mx-auto mt-6 max-w-2xl text-lg text-neutral-300 md:text-xl">
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 md:text-xl">
       Browse a directory of community-built BigConfig packages and ONCE
       applications. Add any public package or compatible application you find
       so others can discover and deploy it.
@@ -54,67 +54,67 @@ const totalCount = packageCount + applicationCount;
     >
       <a
         href="/packages"
-        class="rounded-full bg-yellow-400 px-6 py-3.5 text-center text-base font-semibold text-neutral-950 transition hover:bg-yellow-300"
+        class="rounded-full bg-yellow-400 px-6 py-3.5 text-center text-base font-semibold text-slate-950 transition hover:bg-yellow-300"
         >Browse packages</a
       >
       <a
         href="/applications"
-        class="rounded-full bg-yellow-400 px-6 py-3.5 text-center text-base font-semibold text-neutral-950 transition hover:bg-yellow-300"
+        class="rounded-full bg-yellow-400 px-6 py-3.5 text-center text-base font-semibold text-slate-950 transition hover:bg-yellow-300"
         >Browse applications</a
       >
       <a
         href="/submit"
-        class="rounded-full border border-neutral-700 px-6 py-3.5 text-center text-base font-semibold text-neutral-200 transition hover:border-neutral-500 hover:text-white"
+        class="rounded-full border border-slate-300 px-6 py-3.5 text-center text-base font-semibold text-slate-700 transition hover:border-yellow-500/60 hover:text-slate-950"
         >Add a package</a
       >
       <a
         href="/applications/submit"
-        class="rounded-full border border-neutral-700 px-6 py-3.5 text-center text-base font-semibold text-neutral-200 transition hover:border-neutral-500 hover:text-white"
+        class="rounded-full border border-slate-300 px-6 py-3.5 text-center text-base font-semibold text-slate-700 transition hover:border-yellow-500/60 hover:text-slate-950"
         >Add an application</a
       >
     </div>
-    <p class="mt-6 text-sm text-neutral-500">
+    <p class="mt-6 text-sm text-slate-500">
       A public index for useful packages and deployable applications.
     </p>
   </section>
 
   <section class="mx-auto max-w-6xl px-6 py-12">
     <div
-      class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-800 md:grid-cols-4"
+      class="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 md:grid-cols-4"
     >
       <a
         href="/packages"
         aria-label={`Browse all ${packageCount} packages`}
-        class="bg-neutral-950 p-6 text-center"
+        class="bg-white p-6 text-center"
       >
-        <div class="text-3xl font-semibold text-white md:text-4xl">
+        <div class="text-3xl font-semibold text-slate-950 md:text-4xl">
           {packageCount}
         </div>
-        <div class="mt-2 text-xs uppercase tracking-wider text-neutral-400">
+        <div class="mt-2 text-xs uppercase tracking-wider text-slate-600">
           packages
         </div>
       </a>
       <a
         href="/applications"
         aria-label={`Browse all ${applicationCount} applications`}
-        class="bg-neutral-950 p-6 text-center"
+        class="bg-white p-6 text-center"
       >
-        <div class="text-3xl font-semibold text-white md:text-4xl">
+        <div class="text-3xl font-semibold text-slate-950 md:text-4xl">
           {applicationCount}
         </div>
-        <div class="mt-2 text-xs uppercase tracking-wider text-neutral-400">
+        <div class="mt-2 text-xs uppercase tracking-wider text-slate-600">
           applications
         </div>
       </a>
-      <div class="bg-neutral-950 p-6 text-center">
-        <div class="text-3xl font-semibold text-white md:text-4xl">Source</div>
-        <div class="mt-2 text-xs uppercase tracking-wider text-neutral-400">
+      <div class="bg-white p-6 text-center">
+        <div class="text-3xl font-semibold text-slate-950 md:text-4xl">Source</div>
+        <div class="mt-2 text-xs uppercase tracking-wider text-slate-600">
           on github
         </div>
       </div>
-      <div class="bg-neutral-950 p-6 text-center">
-        <div class="text-3xl font-semibold text-white md:text-4xl">Agent</div>
-        <div class="mt-2 text-xs uppercase tracking-wider text-neutral-400">
+      <div class="bg-white p-6 text-center">
+        <div class="text-3xl font-semibold text-slate-950 md:text-4xl">Agent</div>
+        <div class="mt-2 text-xs uppercase tracking-wider text-slate-600">
           ready
         </div>
       </div>
@@ -124,32 +124,32 @@ const totalCount = packageCount + applicationCount;
   <section id="recent" class="mx-auto max-w-6xl px-6 py-24">
     <div class="mb-16 text-center">
       <div
-        class="mb-4 inline-block text-xs font-semibold uppercase tracking-widest text-yellow-400"
+        class="mb-4 inline-block text-xs font-semibold uppercase tracking-widest text-amber-600"
       >
         Recent entries
       </div>
-      <h2 class="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+      <h2 class="text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
         Browse the shelf.
       </h2>
-      <p class="mx-auto mt-4 max-w-2xl text-neutral-400">
+      <p class="mx-auto mt-4 max-w-2xl text-slate-600">
         Latest community-built BigConfig packages and ONCE applications. New
         entries land every week.
       </p>
     </div>
     {
       recent.length === 0 ? (
-        <div class="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-10 text-center text-neutral-400">
+        <div class="rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-10 text-center text-slate-600">
           <p>No entries yet — add the first package or application.</p>
           <div class="mt-6 flex flex-wrap justify-center gap-3">
             <a
               href="/submit"
-              class="inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-neutral-950 hover:bg-yellow-300"
+              class="inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-yellow-300"
             >
               Add a package
             </a>
             <a
               href="/applications/submit"
-              class="inline-block rounded-full border border-neutral-700 px-6 py-3 text-sm font-semibold text-neutral-200 hover:border-neutral-500 hover:text-white"
+              class="inline-block rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:border-yellow-500/60 hover:text-slate-950"
             >
               Add an application
             </a>
@@ -172,13 +172,13 @@ const totalCount = packageCount + applicationCount;
         <div class="mt-12 flex flex-wrap justify-center gap-3">
           <a
             href="/packages"
-            class="rounded-full border border-neutral-700 px-6 py-3 text-sm font-semibold text-neutral-200 transition hover:border-neutral-500 hover:text-white"
+            class="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-yellow-500/60 hover:text-slate-950"
           >
             See all {packageCount} packages
           </a>
           <a
             href="/applications"
-            class="rounded-full border border-neutral-700 px-6 py-3 text-sm font-semibold text-neutral-200 transition hover:border-neutral-500 hover:text-white"
+            class="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-yellow-500/60 hover:text-slate-950"
           >
             See all {applicationCount} applications
           </a>
