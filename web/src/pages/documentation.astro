@@ -54,7 +54,7 @@ uvx bc-pkg package delete`;
 const sections = [
   { id: 'agentic', label: 'Agentic by default' },
   { id: 'use-marketplace', label: 'How to use the Marketplace' },
-  { id: 'bigconfig', label: 'What is BigConfig' },
+  { id: 'bigconfig', label: 'What is BigConfig SDK' },
   { id: 'bigconfig-launcher', label: 'What is BigConfig Launcher' },
   { id: 'bigconfig-package', label: 'What is a BigConfig Package' },
   { id: 'once-package', label: 'What is the Once BigConfig Package' },
@@ -69,7 +69,7 @@ const agenticPoints = [
   },
   {
     title: 'Repackage Terraform projects',
-    body: 'Point your agent at an existing Terraform project and ask it to convert the codebase into a BigConfig package — you bring the runbooks, the agent ports them.',
+    body: 'Point your agent at an existing Terraform project and ask it to convert the codebase into a BigConfig package — you bring the runbooks, the agent ports them to the SDK-backed package model.',
   },
   {
     title: 'Deploy ONCE apps for you',
@@ -77,7 +77,7 @@ const agenticPoints = [
   },
   {
     title: 'No coding required',
-    body: 'You do not write TypeScript, Python, Clojure, Terraform, Ansible, or YAML. You describe what you want; the agent operates BigConfig on your behalf.',
+    body: 'You do not write TypeScript, Python, Clojure, Terraform, Ansible, or YAML. You describe what you want; the agent operates BigConfig packages on your behalf.',
   },
 ];
 ---
@@ -93,7 +93,7 @@ const agenticPoints = [
       How the Marketplace fits together
     </h1>
     <p class="mx-auto mt-4 max-w-xl text-neutral-400">
-      A short tour of BigConfig, BigConfig Launcher, BigConfig Packages, the <code
+      A short tour of BigConfig SDK, BigConfig Launcher, BigConfig packages, the <code
         class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
         >once</code
       > package, ONCE, and ONCE applications — and how they combine to make
@@ -130,9 +130,10 @@ const agenticPoints = [
       Agentic by default
     </h2>
     <p class="mt-6 leading-relaxed text-neutral-300">
-      BigConfig is built so an LLM agent can do the work for you. Every
-      artifact in the workflow — from the package configuration to the
-      deployment commands — is something the agent reads, writes, and runs.
+      BigConfig SDK and the package model are built so an LLM agent can do
+      the work for you. Every artifact in the workflow — from the package
+      configuration to the deployment commands — is something the agent reads,
+      writes, and runs.
       You stay in plain English.
     </p>
     <div class="mt-8 grid gap-4 md:grid-cols-2">
@@ -191,24 +192,24 @@ const agenticPoints = [
 
   <section id="bigconfig" class="mx-auto max-w-3xl px-6 pb-20">
     <h2 class="text-3xl font-semibold tracking-tight text-white">
-      What is BigConfig
+      What is BigConfig SDK
     </h2>
     <p class="mt-6 leading-relaxed text-neutral-300">
       <a
         href="https://bigconfig.ai"
         class="text-yellow-400 hover:underline"
         target="_blank"
-        rel="noopener">BigConfig</a
-      > is the first <em>agentic</em> package manager — a library
-      implemented in TypeScript, Python, and Clojure for delivering
+        rel="noopener">BigConfig SDK</a
+      > is the workflow and rendering library behind the BigConfig package
+      model, implemented in TypeScript, Python, and Clojure for delivering
       infrastructure and software as a single, cohesive unit. It is designed
       so that you don't need to learn it yourself: an LLM agent can operate
-      it on your behalf from a plain English description.
+      packages built on the SDK from a plain English description.
     </p>
     <p class="mt-4 leading-relaxed text-neutral-300">
-      The most radical design choice in BigConfig is what it lacks:
+      The most radical design choice in the SDK is what it lacks:
       <strong class="text-white">a dedicated CLI</strong>. Instead of
-      shipping yet another binary, BigConfig is consumed as a library. Each
+      shipping yet another binary, the SDK is consumed as a library. Each
       package author defines their own CLI surface in the package run file,
       and the <code
         class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
@@ -270,8 +271,8 @@ const agenticPoints = [
     <p class="mt-6 leading-relaxed text-neutral-300">
       A <strong class="text-white">BigConfig Package</strong> is a public
       GitHub repository implemented in TypeScript, Python, or Clojure. Its
-      entry point is a workflow authored with the BigConfig library. The
-      package author defines the lifecycle (<code
+      entry point is a workflow authored with BigConfig SDK. The package
+      author defines the lifecycle (<code
         class="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-yellow-400"
         >create</code
       >, <code
