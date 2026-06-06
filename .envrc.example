@@ -1,6 +1,6 @@
 # Ports for the three dev processes. Incremental from PORT (default 5000)
 # so they stay predictable and collision-free.
-export PORT=${PORT:=5000}
+export PORT=${PORT:=4322}
 : ${PORT_STEP:=100}
 export PB_PORT=$PORT
 export WEB_PORT=$((PB_PORT + PORT_STEP))
