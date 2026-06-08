@@ -26,7 +26,8 @@ import { TAG_GROUPS } from '~/lib/tags';
     >
       <p class="text-slate-600">Sign in to edit your packages.</p>
       <a
-        href="/login"
+        id="login-link"
+        href="/login/"
         class="mt-6 inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-yellow-300"
         >Sign in</a
       >
@@ -158,6 +159,7 @@ import { TAG_GROUPS } from '~/lib/tags';
   const status = document.getElementById('form-status')!;
   const nameEl = document.getElementById('pkg-name')!;
   const deleteBtn = document.getElementById('delete-btn')!;
+  const loginLink = document.getElementById('login-link') as HTMLAnchorElement | null;
   const languageCheckboxes = Array.from(
     form.querySelectorAll<HTMLInputElement>('.language-checkbox')
   );
@@ -213,6 +215,9 @@ import { TAG_GROUPS } from '~/lib/tags';
     errorBox.textContent = 'No package id in URL.';
   } else if (!pb.authStore.isValid) {
     loading.classList.add('hidden');
+    if (loginLink) {
+      loginLink.href = `/login/?next=${encodeURIComponent(`/me/edit/?id=${id}`)}`;
+    }
     gate.classList.remove('hidden');
   } else {
     load();

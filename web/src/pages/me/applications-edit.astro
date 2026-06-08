@@ -25,7 +25,8 @@ import { APPLICATION_TAG_GROUPS as TAG_GROUPS } from '~/lib/tags';
     >
       <p class="text-slate-600">Sign in to edit your applications.</p>
       <a
-        href="/login"
+        id="login-link"
+        href="/login/"
         class="mt-6 inline-block rounded-full bg-yellow-400 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-yellow-300"
         >Sign in</a
       >
@@ -139,6 +140,7 @@ import { APPLICATION_TAG_GROUPS as TAG_GROUPS } from '~/lib/tags';
   const status = document.getElementById('form-status')!;
   const nameEl = document.getElementById('app-name')!;
   const deleteBtn = document.getElementById('delete-btn')!;
+  const loginLink = document.getElementById('login-link') as HTMLAnchorElement | null;
 
   const id = new URLSearchParams(location.search).get('id') || '';
 
@@ -148,6 +150,9 @@ import { APPLICATION_TAG_GROUPS as TAG_GROUPS } from '~/lib/tags';
     errorBox.textContent = 'No application id in URL.';
   } else if (!pb.authStore.isValid) {
     loading.classList.add('hidden');
+    if (loginLink) {
+      loginLink.href = `/login/?next=${encodeURIComponent(`/me/applications-edit/?id=${id}`)}`;
+    }
     gate.classList.remove('hidden');
   } else {
     load();

@@ -55,8 +55,13 @@ import Layout from '~/layouts/Layout.astro';
   const button = document.getElementById('google-signin') as HTMLButtonElement;
   const status = document.getElementById('login-status') as HTMLElement;
 
+  function nextPath(): string {
+    const raw = new URLSearchParams(location.search).get('next') || '';
+    return raw.startsWith('/') && !raw.startsWith('//') ? raw : '/me/packages/';
+  }
+
   if (pb.authStore.isValid) {
-    location.href = '/me/packages';
+    location.href = nextPath();
   }
 
   button?.addEventListener('click', async () => {
@@ -71,9 +76,7 @@ import Layout from '~/layouts/Layout.astro';
       const avatarUrl = meta.avatarURL || meta.avatarUrl || '';
       if (avatarUrl) localStorage.setItem('user_avatar_url', avatarUrl);
       status.textContent = 'Signed in. Redirecting…';
-      const raw = new URLSearchParams(location.search).get('next') || '';
-      const next = raw.startsWith('/') && !raw.startsWith('//') ? raw : '/me/packages';
-      location.href = next;
+      location.href = nextPath();
     } catch (err) {
       console.error(err);
       status.textContent =
