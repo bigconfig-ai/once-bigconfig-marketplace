@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/Layout.astro';
+import { LANGUAGE_OPTIONS } from '~/lib/languages';
 import { TAG_GROUPS } from '~/lib/tags';
 ---
 
@@ -46,6 +47,35 @@ import { TAG_GROUPS } from '~/lib/tags';
           class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 placeholder-slate-400 outline-none focus:border-yellow-400"
         />
       </label>
+      <div>
+        <span class="mb-2 block text-sm font-medium text-slate-700">Languages</span>
+        <p class="mb-3 text-xs text-slate-500">
+          Select every implementation this repo provides and enter the explicit branch name for each one.
+        </p>
+        <div class="grid gap-3">
+          {LANGUAGE_OPTIONS.map((language) => (
+            <div class="rounded-xl border border-slate-200 bg-white/70 p-4">
+              <label class="flex cursor-pointer items-center gap-2 text-sm font-medium text-slate-700">
+                <input
+                  type="checkbox"
+                  name="languages"
+                  value={language.slug}
+                  class="language-checkbox h-4 w-4 rounded border-slate-300 text-yellow-400 focus:ring-yellow-400"
+                />
+                {language.label}
+              </label>
+              <input
+                name={`branch_${language.slug}`}
+                type="text"
+                data-language={language.slug}
+                disabled
+                placeholder="branch name"
+                class="language-branch-input mt-3 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 font-mono text-sm text-slate-950 placeholder-slate-400 outline-none focus:border-yellow-400 disabled:bg-slate-100 disabled:text-slate-400"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
       <label class="block text-sm">
         <span class="mb-2 block font-medium text-slate-700"
           >Description (optional — pulled from GitHub if blank)</span
@@ -103,12 +133,59 @@ import { TAG_GROUPS } from '~/lib/tags';
 
 <script>
   import PocketBase from 'pocketbase';
+  import { LANGUAGE_OPTIONS } from '../lib/languages';
   import { formatPbError } from '../lib/pb';
 
   const pb = new PocketBase(import.meta.env.PUBLIC_PB_URL || '');
   const gate = document.getElementById('auth-gate')!;
   const form = document.getElementById('submit-form') as HTMLFormElement;
   const status = document.getElementById('form-status')!;
+  const languageCheckboxes = Array.from(
+    form.querySelectorAll<HTMLInputElement>('.language-checkbox')
+  );
+
+  function branchInput(language: string): HTMLInputElement | null {
+    return form.querySelector<HTMLInputElement>(
+      `.language-branch-input[data-language="${CSS.escape(language)}"]`
+    );
+  }
+
+  function syncLanguageInputs() {
+    for (const checkbox of languageCheckboxes) {
+      const input = branchInput(checkbox.value);
+      if (!input) continue;
+      input.disabled = !checkbox.checked;
+      input.required = checkbox.checked;
+    }
+  }
+
+  function collectLanguageBranches(): Record<string, string> | null {
+    const branches: Record<string, string> = {};
+    for (const language of LANGUAGE_OPTIONS) {
+      const checkbox = form.querySelector<HTMLInputElement>(
+        `input[name="languages"][value="${CSS.escape(language.slug)}"]`
+      );
+      if (!checkbox?.checked) continue;
+      const branch = branchInput(language.slug)?.value.trim() ?? '';
+      if (!branch) {
+        status.classList.remove('hidden');
+        status.textContent = `Enter a branch for ${language.label}.`;
+        return null;
+      }
+      branches[language.slug] = branch;
+    }
+    if (Object.keys(branches).length === 0) {
+      status.classList.remove('hidden');
+      status.textContent = 'Select at least one language implementation.';
+      return null;
+    }
+    return branches;
+  }
+
+  for (const checkbox of languageCheckboxes) {
+    checkbox.addEventListener('change', syncLanguageInputs);
+  }
+  syncLanguageInputs();
 
   if (!pb.authStore.isValid) {
     gate.classList.remove('hidden');
@@ -121,16 +198,19 @@ import { TAG_GROUPS } from '~/lib/tags';
     const button = form.querySelector(
       'button[type=submit]'
     ) as HTMLButtonElement;
+    const language_branches = collectLanguageBranches();
+    if (!language_branches) return;
     const data = new FormData(form);
     const tags = data.getAll('tags') as string[];
     const payload = {
       github_url: data.get('github_url'),
+      language_branches,
       description: data.get('description'),
       tags,
     };
     button.disabled = true;
     status.classList.remove('hidden');
-    status.textContent = 'Adding…';
+    status.textContent = 'Adding (verifying branches)…';
     try {
       await pb.collection('packages').create(payload);
       status.textContent =

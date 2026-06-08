@@ -1,6 +1,7 @@
 ---
 import TagChip from './TagChip.astro';
 import type { PackageRecord } from '~/lib/pb';
+import { packageLanguageEntries } from '~/lib/languages';
 import { ownerRepo } from '~/lib/packages';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 const { pkg, highlighted = false, showType = false } = Astro.props;
 const { owner, repo } = ownerRepo(pkg.name);
 const submitterName = pkg.expand?.submitter?.name || pkg.expand?.submitter?.id || 'unknown';
+const implementations = packageLanguageEntries(pkg);
 ---
 
 <a
@@ -71,6 +73,19 @@ const submitterName = pkg.expand?.submitter?.name || pkg.expand?.submitter?.id |
   <p class="mt-4 flex-1 text-sm leading-relaxed text-slate-600">
     {pkg.description}
   </p>
+  {
+    implementations.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        {implementations.map((implementation) => (
+          <span class="inline-flex items-center gap-1 rounded-full border border-yellow-200 bg-yellow-50 px-2.5 py-1 text-xs text-amber-800">
+            <span class="font-semibold">{implementation.label}</span>
+            <span class="text-amber-500">@</span>
+            <span class="font-mono text-[11px]">{implementation.branch}</span>
+          </span>
+        ))}
+      </div>
+    )
+  }
   {
     pkg.tags && pkg.tags.length > 0 && (
       <div class="mt-5 flex flex-wrap gap-2">

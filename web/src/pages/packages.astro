@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import PackageCard from '~/components/PackageCard.astro';
+import { LANGUAGE_OPTIONS, packageLanguages } from '~/lib/languages';
 import { fetchApprovedPackages } from '~/lib/packages';
 import { TAG_GROUPS } from '~/lib/tags';
 
@@ -35,6 +36,23 @@ const all = await fetchApprovedPackages();
         class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 placeholder-slate-400 outline-none focus:border-yellow-400"
       />
       <div class="mt-6 space-y-4">
+        <div>
+          <div class="mb-2 text-xs font-semibold tracking-wider text-slate-500 uppercase">
+            Languages
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {LANGUAGE_OPTIONS.map((language) => (
+              <button
+                type="button"
+                class="language-filter rounded-full border border-yellow-200 bg-yellow-50/70 px-2.5 py-0.5 text-xs text-amber-700 transition hover:bg-yellow-100 data-[active=true]:bg-yellow-400 data-[active=true]:text-slate-950"
+                data-language={language.slug}
+                data-active="false"
+              >
+                {language.label}
+              </button>
+            ))}
+          </div>
+        </div>
         {
           TAG_GROUPS.map((group) => (
             <div>
@@ -91,6 +109,7 @@ const all = await fetchApprovedPackages();
               data-name={p.name.toLowerCase()}
               data-description={(p.description || '').toLowerCase()}
               data-tags={(p.tags || []).join(',')}
+              data-languages={packageLanguages(p).join(',')}
             >
               <PackageCard pkg={p} showType />
             </div>
@@ -116,11 +135,15 @@ const all = await fetchApprovedPackages();
   const filterBtns = Array.from(
     document.querySelectorAll<HTMLButtonElement>('.tag-filter')
   );
+  const languageBtns = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.language-filter')
+  );
   const cards = Array.from(
     document.querySelectorAll<HTMLElement>('.package-card-wrapper')
   );
   const total = cards.length;
   const activeTags = new Set<string>();
+  const activeLanguages = new Set<string>();
 
   function apply() {
     const q = (search?.value ?? '').trim().toLowerCase();
@@ -129,10 +152,13 @@ const all = await fetchApprovedPackages();
       const name = card.dataset.name ?? '';
       const desc = card.dataset.description ?? '';
       const tags = (card.dataset.tags ?? '').split(',').filter(Boolean);
+      const languages = (card.dataset.languages ?? '').split(',').filter(Boolean);
       const matchesQuery = !q || name.includes(q) || desc.includes(q);
       const matchesTags =
         activeTags.size === 0 || [...activeTags].every((t) => tags.includes(t));
-      const visible = matchesQuery && matchesTags;
+      const matchesLanguages =
+        activeLanguages.size === 0 || languages.some((l) => activeLanguages.has(l));
+      const visible = matchesQuery && matchesTags && matchesLanguages;
       card.classList.toggle('hidden', !visible);
       if (visible) shown++;
     }
@@ -157,9 +183,24 @@ const all = await fetchApprovedPackages();
       apply();
     });
   }
+  for (const btn of languageBtns) {
+    btn.addEventListener('click', () => {
+      const language = btn.dataset.language!;
+      if (activeLanguages.has(language)) {
+        activeLanguages.delete(language);
+        btn.dataset.active = 'false';
+      } else {
+        activeLanguages.add(language);
+        btn.dataset.active = 'true';
+      }
+      apply();
+    });
+  }
   clearBtn?.addEventListener('click', () => {
     activeTags.clear();
+    activeLanguages.clear();
     for (const btn of filterBtns) btn.dataset.active = 'false';
+    for (const btn of languageBtns) btn.dataset.active = 'false';
     if (search) search.value = '';
     apply();
   });

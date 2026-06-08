@@ -13,6 +13,14 @@ const PROTECTED_FIELDS = [
   "docker_image",
 ];
 
+const PACKAGE_LANGUAGES = ["typescript", "python", "clojure"];
+const PACKAGE_LANGUAGE_LABELS = {
+  typescript: "TypeScript",
+  python: "Python",
+  clojure: "Clojure",
+};
+const PACKAGE_LANGUAGE_SET = new Set(PACKAGE_LANGUAGES);
+
 // Registries whose images are accepted for submission. Anything else is rejected
 // to prevent SSRF via arbitrary registry hostnames.
 const ALLOWED_REGISTRIES = new Set([
@@ -69,15 +77,19 @@ function parseGithubName(url) {
   return m[1] + "/" + repo;
 }
 
-function fetchGithubMeta(name) {
+function githubHeaders() {
   const headers = { "User-Agent": "bigconfig-marketplace" };
   const token = $os.getenv("GITHUB_TOKEN");
   if (token) headers["Authorization"] = "Bearer " + token;
+  return headers;
+}
+
+function fetchGithubMeta(name) {
   try {
     const res = $http.send({
       url: "https://api.github.com/repos/" + name,
       method: "GET",
-      headers: headers,
+      headers: githubHeaders(),
       timeout: 10,
     });
     if (res.statusCode !== 200) return null;
@@ -131,6 +143,121 @@ function isSuperuser(auth) {
     return auth && auth.collection().name === "_superusers";
   } catch (err) {
     return false;
+  }
+}
+
+function parseJsonFieldValue(value) {
+  if (value === null || value === undefined || value === "") return null;
+  if (typeof value === "string") {
+    try {
+      return JSON.parse(value);
+    } catch (err) {
+      throw new BadRequestError("language_branches must be a JSON object");
+    }
+  }
+  if (value && typeof value === "object" && typeof value.string === "function") {
+    const raw = value.string();
+    if (!raw || raw === "null") return null;
+    try {
+      return JSON.parse(raw);
+    } catch (err) {
+      throw new BadRequestError("language_branches must be a JSON object");
+    }
+  }
+  return value;
+}
+
+function isSafeBranchName(branch) {
+  if (!branch || branch.length > 200) return false;
+  if (/\s/.test(branch)) return false;
+  if (/[~^:?*[\\\x00-\x1f\x7f]/.test(branch)) return false;
+  if (branch.indexOf("..") !== -1) return false;
+  if (branch.indexOf("//") !== -1) return false;
+  if (branch[0] === "/" || branch[branch.length - 1] === "/") return false;
+  if (branch[branch.length - 1] === ".") return false;
+  if (branch.endsWith(".lock")) return false;
+  return true;
+}
+
+function normalizeLanguageBranches(value) {
+  const parsed = parseJsonFieldValue(value);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    throw new BadRequestError(
+      "language_branches must include at least one language branch mapping"
+    );
+  }
+
+  const languageBranches = {};
+  for (const language of Object.keys(parsed)) {
+    if (!PACKAGE_LANGUAGE_SET.has(language)) {
+      throw new BadRequestError(
+        "unsupported package language: " + language +
+          ". Supported: " + PACKAGE_LANGUAGES.join(", ")
+      );
+    }
+    const rawBranch = parsed[language];
+    if (typeof rawBranch !== "string") {
+      throw new BadRequestError(
+        "branch for " + PACKAGE_LANGUAGE_LABELS[language] + " must be a string"
+      );
+    }
+    const branch = rawBranch.trim();
+    if (!branch) {
+      throw new BadRequestError(
+        "branch for " + PACKAGE_LANGUAGE_LABELS[language] + " is required"
+      );
+    }
+    if (!isSafeBranchName(branch)) {
+      throw new BadRequestError(
+        "branch for " + PACKAGE_LANGUAGE_LABELS[language] +
+          " contains unsupported characters"
+      );
+    }
+    languageBranches[language] = branch;
+  }
+
+  const languages = PACKAGE_LANGUAGES.filter((language) => languageBranches[language]);
+  if (languages.length === 0) {
+    throw new BadRequestError(
+      "language_branches must include at least one language branch mapping"
+    );
+  }
+
+  return { languageBranches: languageBranches, languages: languages };
+}
+
+function validateGithubBranches(name, languageBranches) {
+  for (const language of Object.keys(languageBranches)) {
+    const branch = languageBranches[language];
+    let res;
+    try {
+      res = $http.send({
+        url:
+          "https://api.github.com/repos/" +
+          name +
+          "/branches/" +
+          encodeURIComponent(branch),
+        method: "GET",
+        headers: githubHeaders(),
+        timeout: 10,
+      });
+    } catch (err) {
+      throw new BadRequestError(
+        "could not verify " + PACKAGE_LANGUAGE_LABELS[language] +
+          " branch `" + branch + "`: " + err
+      );
+    }
+    if (res.statusCode === 404) {
+      throw new BadRequestError(
+        PACKAGE_LANGUAGE_LABELS[language] + " branch not found on GitHub: " + branch
+      );
+    }
+    if (res.statusCode < 200 || res.statusCode >= 300) {
+      throw new BadRequestError(
+        "could not verify " + PACKAGE_LANGUAGE_LABELS[language] +
+          " branch `" + branch + "` on GitHub (HTTP " + res.statusCode + ")"
+      );
+    }
   }
 }
 
@@ -300,6 +427,10 @@ function validateDockerImage(image) {
 
 module.exports = {
   PROTECTED_FIELDS,
+  PACKAGE_LANGUAGES,
+  PACKAGE_LANGUAGE_LABELS,
+  normalizeLanguageBranches,
+  validateGithubBranches,
   parseGithubName,
   fetchGithubMeta,
   dispatchRebuild,

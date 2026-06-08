@@ -1,15 +1,15 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 
-const launcherBootstrap = `# Bootstrap a TypeScript target through the npm launcher
-npx bc-pkg bigconfig-ai/once@typescript package validate
+const launcherBootstrap = `# Bootstrap the branch listed for your chosen package implementation
+npx bc-pkg owner/repo@<branch> package validate
 
-# Bootstrap a Python target through the PyPI launcher
-uvx bc-pkg bigconfig-ai/once@python package validate
+# Use the same GitHub branch/ref form with the PyPI launcher
+uvx bc-pkg owner/repo@<branch> package validate
 
-# Launch a Clojure target through either launcher
-npx bc-pkg bigconfig-ai/once@clojure package validate
-uvx bc-pkg bigconfig-ai/once@clojure package validate`;
+# Example: the Once package may publish implementation branches per language
+npx bc-pkg bigconfig-ai/once@<branch> package validate
+uvx bc-pkg bigconfig-ai/once@<branch> package validate`;
 
 const packageLifecycle = `# After the first run, the target is pinned in this directory
 npx bc-pkg package create
@@ -34,13 +34,9 @@ const onceApplicationProfile = `{
   }
 }`;
 
-const onceLifecycle = `# Bootstrap the Once package
-npx bc-pkg bigconfig-ai/once@typescript package validate
-uvx bc-pkg bigconfig-ai/once@python package validate
-
-# Clojure target packages work through either launcher
-npx bc-pkg bigconfig-ai/once@clojure package validate
-uvx bc-pkg bigconfig-ai/once@clojure package validate
+const onceLifecycle = `# Bootstrap the Once package with the branch listed for your chosen implementation
+npx bc-pkg bigconfig-ai/once@<branch> package validate
+uvx bc-pkg bigconfig-ai/once@<branch> package validate
 
 # Then operate the pinned workspace
 npx bc-pkg package create
@@ -244,8 +240,8 @@ const agenticPoints = [
         class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >run</code
       > file into the current directory, and writes the local manifest needed
-      to execute that language. The run file contains a default profile for
-      the package, so your agent starts from a concrete working shape.
+      to execute that implementation. The run file contains a default profile
+      for the package, so your agent starts from a concrete working shape.
       Subsequent runs can omit the repo/ref and use the pinned target.
     </p>
     <p class="mt-4 leading-relaxed text-slate-600">
@@ -270,9 +266,10 @@ const agenticPoints = [
     </h2>
     <p class="mt-6 leading-relaxed text-slate-600">
       A <strong class="text-slate-950">BigConfig Package</strong> is a public
-      GitHub repository implemented in TypeScript, Python, or Clojure. Its
-      entry point is a workflow authored with BigConfig SDK. The package
-      author defines the lifecycle (<code
+      GitHub repository with one or more implementation branches in TypeScript,
+      Python, or Clojure. Branch names are explicit and do not have to match
+      language names. Each implementation's entry point is a workflow authored
+      with BigConfig SDK. The package author defines the lifecycle (<code
         class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >create</code
       >, <code
@@ -288,7 +285,7 @@ const agenticPoints = [
       parameters it exposes.
     </p>
     <p class="mt-4 leading-relaxed text-slate-600">
-      The package shape is intentionally small: exactly one language
+      Each implementation branch is intentionally small: exactly one language
       manifest (<code
         class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >package.json</code
@@ -358,8 +355,8 @@ const agenticPoints = [
     </p>
     <p class="mt-4 leading-relaxed text-slate-600">
       The package is implemented across TypeScript, Python, and Clojure and
-      exposes the same external command shape in each language. Choose the
-      target you want, let <code
+      exposes the same external command shape in each implementation. Choose
+      the branch listed for the implementation you want, let <code
         class="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-amber-600"
         >bc-pkg</code
       > bootstrap it, then operate the pinned workspace.

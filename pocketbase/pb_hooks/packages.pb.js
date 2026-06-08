@@ -6,7 +6,11 @@
 // PB's JSVM does not share the file's top-level scope with hook callbacks.
 
 onRecordCreateRequest((e) => {
-  const { parseGithubName } = require(`${__hooks}/utils.js`);
+  const {
+    normalizeLanguageBranches,
+    parseGithubName,
+    validateGithubBranches,
+  } = require(`${__hooks}/utils.js`);
   if (!e.auth) {
     throw new BadRequestError("must be signed in");
   }
@@ -17,7 +21,11 @@ onRecordCreateRequest((e) => {
       "github_url must be a public GitHub repo URL like https://github.com/owner/repo"
     );
   }
+  const normalized = normalizeLanguageBranches(e.record.get("language_branches"));
+  validateGithubBranches(name, normalized.languageBranches);
   e.record.set("name", name);
+  e.record.set("language_branches", normalized.languageBranches);
+  e.record.set("languages", normalized.languages);
   e.record.set("status", "pending");
   e.record.set("stars", 0);
   e.record.set("submitter", e.auth.id);
@@ -47,15 +55,22 @@ onRecordAfterCreateSuccess((e) => {
 }, "packages");
 
 onRecordUpdateRequest((e) => {
-  const { isSuperuser, PROTECTED_FIELDS } = require(`${__hooks}/utils.js`);
-  if (isSuperuser(e.auth)) {
-    e.next();
-    return;
+  const {
+    isSuperuser,
+    normalizeLanguageBranches,
+    PROTECTED_FIELDS,
+    validateGithubBranches,
+  } = require(`${__hooks}/utils.js`);
+  if (!isSuperuser(e.auth)) {
+    const original = e.record.original();
+    for (const field of PROTECTED_FIELDS) {
+      e.record.set(field, original.get(field));
+    }
   }
-  const original = e.record.original();
-  for (const field of PROTECTED_FIELDS) {
-    e.record.set(field, original.get(field));
-  }
+  const normalized = normalizeLanguageBranches(e.record.get("language_branches"));
+  validateGithubBranches(e.record.getString("name"), normalized.languageBranches);
+  e.record.set("language_branches", normalized.languageBranches);
+  e.record.set("languages", normalized.languages);
   e.next();
 }, "packages");
 

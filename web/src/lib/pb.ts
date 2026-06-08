@@ -9,6 +9,8 @@ const FIELD_LABELS: Record<string, string> = {
   github_url: 'GitHub URL',
   description: 'Description',
   docker_image: 'Docker image',
+  languages: 'Languages',
+  language_branches: 'Language branches',
 };
 
 export function escapeHtml(s: unknown): string {
@@ -43,6 +45,8 @@ export interface PackageRecord extends RecordModel {
   name: string;
   description: string;
   tags: string[];
+  languages?: string[];
+  language_branches?: Record<string, string> | null;
   submitter: string;
   status: 'pending' | 'approved' | 'rejected';
   stars: number;

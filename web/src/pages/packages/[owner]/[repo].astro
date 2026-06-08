@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 import TagChip from '~/components/TagChip.astro';
+import { packageLanguageEntries } from '~/lib/languages';
 import { fetchApprovedPackages, ownerRepo } from '~/lib/packages';
 import type { PackageRecord } from '~/lib/pb';
 
@@ -28,10 +29,15 @@ const pushed = pkg.pushed_at
       day: 'numeric',
     })
   : null;
+const implementations = packageLanguageEntries(pkg);
+const implementationPromptLines = implementations.length > 0
+  ? implementations.map((implementation) => `  - ${implementation.label}: ${implementation.branch}`).join('\n')
+  : '  - no implementations configured yet; ask the package submitter for the branch';
 
 const usePrompt = `- installer can be npx or uvx, ask me which one to use
-- language can be typescript, python, or clojure, ask me which one to use
-- run <installer> bc-pkg ${pkg.name}@<language> package validate
+- choose one implementation:
+${implementationPromptLines}
+- run <installer> bc-pkg ${pkg.name}@<chosen-branch> package validate
 - iterate on failure`;
 ---
 
@@ -79,6 +85,31 @@ const usePrompt = `- installer can be npx or uvx, ask me which one to use
           <p class="mt-3 leading-relaxed text-slate-600">
             {pkg.description || 'No description provided.'}
           </p>
+        </div>
+        <div
+          class="mt-6 rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-8"
+        >
+          <h2 class="text-lg font-semibold text-slate-950">Implementations</h2>
+          {
+            implementations.length > 0 ? (
+              <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                {implementations.map((implementation) => (
+                  <div class="rounded-xl border border-yellow-200 bg-yellow-50/70 p-4">
+                    <div class="text-sm font-semibold text-slate-950">
+                      {implementation.label}
+                    </div>
+                    <div class="mt-1 font-mono text-xs text-amber-700">
+                      {implementation.branch}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p class="mt-3 text-sm text-slate-600">
+                No implementation branches have been configured yet.
+              </p>
+            )
+          }
         </div>
         <div
           class="mt-6 rounded-2xl border border-slate-200 bg-white/85 shadow-sm shadow-slate-900/5 p-8"
@@ -133,7 +164,7 @@ const usePrompt = `- installer can be npx or uvx, ask me which one to use
             {
               pkg.default_branch && (
                 <div class="flex justify-between gap-4">
-                  <dt class="text-slate-600">Branch</dt>
+                  <dt class="text-slate-600">Default branch</dt>
                   <dd class="text-slate-950 font-mono text-xs">
                     {pkg.default_branch}
                   </dd>

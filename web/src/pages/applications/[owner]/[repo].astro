@@ -34,8 +34,8 @@ const usePrompt = `- deploy ${app.name}
 - the docker image is ${app.docker_image}
 - the host is WWW.REPLACE_ME.COM
 - installer can be npx or uvx, ask me which one to use
-- language can be typescript, python, or clojure, ask me which one to use
-- run <installer> bc-pkg bigconfig-ai/once@<language> package validate
+- choose the once package implementation branch for TypeScript, Python, or Clojure
+- run <installer> bc-pkg bigconfig-ai/once@<chosen-branch> package validate
 - iterate on failure`;
 ---
 
@@ -132,7 +132,7 @@ const usePrompt = `- deploy ${app.name}
             {
               app.default_branch && (
                 <div class="flex justify-between gap-4">
-                  <dt class="text-slate-600">Branch</dt>
+                  <dt class="text-slate-600">Default branch</dt>
                   <dd class="text-slate-950 font-mono text-xs">
                     {app.default_branch}
                   </dd>

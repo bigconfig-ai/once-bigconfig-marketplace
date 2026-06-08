@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/Layout.astro';
+import { LANGUAGE_OPTIONS } from '~/lib/languages';
 import { TAG_GROUPS } from '~/lib/tags';
 ---
 
@@ -55,6 +56,35 @@ import { TAG_GROUPS } from '~/lib/tags';
           different repo.</span
         >
       </label>
+      <div>
+        <span class="mb-2 block text-sm font-medium text-slate-700">Languages</span>
+        <p class="mb-3 text-xs text-slate-500">
+          Select every implementation this repo provides and enter the explicit branch name for each one.
+        </p>
+        <div class="grid gap-3">
+          {LANGUAGE_OPTIONS.map((language) => (
+            <div class="rounded-xl border border-slate-200 bg-white/70 p-4">
+              <label class="flex cursor-pointer items-center gap-2 text-sm font-medium text-slate-700">
+                <input
+                  type="checkbox"
+                  name="languages"
+                  value={language.slug}
+                  class="language-checkbox h-4 w-4 rounded border-slate-300 text-yellow-400 focus:ring-yellow-400"
+                />
+                {language.label}
+              </label>
+              <input
+                name={`branch_${language.slug}`}
+                type="text"
+                data-language={language.slug}
+                disabled
+                placeholder="branch name"
+                class="language-branch-input mt-3 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 font-mono text-sm text-slate-950 placeholder-slate-400 outline-none focus:border-yellow-400 disabled:bg-slate-100 disabled:text-slate-400"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
       <label class="block text-sm">
         <span class="mb-2 block font-medium text-slate-700">Description</span>
         <textarea
@@ -117,6 +147,7 @@ import { TAG_GROUPS } from '~/lib/tags';
 
 <script>
   import PocketBase from 'pocketbase';
+  import { LANGUAGE_OPTIONS } from '../../lib/languages';
   import { formatPbError } from '../../lib/pb';
 
   const pb = new PocketBase(import.meta.env.PUBLIC_PB_URL || '');
@@ -127,6 +158,52 @@ import { TAG_GROUPS } from '~/lib/tags';
   const status = document.getElementById('form-status')!;
   const nameEl = document.getElementById('pkg-name')!;
   const deleteBtn = document.getElementById('delete-btn')!;
+  const languageCheckboxes = Array.from(
+    form.querySelectorAll<HTMLInputElement>('.language-checkbox')
+  );
+
+  function branchInput(language: string): HTMLInputElement | null {
+    return form.querySelector<HTMLInputElement>(
+      `.language-branch-input[data-language="${CSS.escape(language)}"]`
+    );
+  }
+
+  function syncLanguageInputs() {
+    for (const checkbox of languageCheckboxes) {
+      const input = branchInput(checkbox.value);
+      if (!input) continue;
+      input.disabled = !checkbox.checked;
+      input.required = checkbox.checked;
+    }
+  }
+
+  function collectLanguageBranches(): Record<string, string> | null {
+    const branches: Record<string, string> = {};
+    for (const language of LANGUAGE_OPTIONS) {
+      const checkbox = form.querySelector<HTMLInputElement>(
+        `input[name="languages"][value="${CSS.escape(language.slug)}"]`
+      );
+      if (!checkbox?.checked) continue;
+      const branch = branchInput(language.slug)?.value.trim() ?? '';
+      if (!branch) {
+        status.classList.remove('hidden');
+        status.textContent = `Enter a branch for ${language.label}.`;
+        return null;
+      }
+      branches[language.slug] = branch;
+    }
+    if (Object.keys(branches).length === 0) {
+      status.classList.remove('hidden');
+      status.textContent = 'Select at least one language implementation.';
+      return null;
+    }
+    return branches;
+  }
+
+  for (const checkbox of languageCheckboxes) {
+    checkbox.addEventListener('change', syncLanguageInputs);
+  }
+  syncLanguageInputs();
 
   const id = new URLSearchParams(location.search).get('id') || '';
 
@@ -156,6 +233,17 @@ import { TAG_GROUPS } from '~/lib/tags';
         pkg.github_url;
       (form.elements.namedItem('description') as HTMLTextAreaElement).value =
         pkg.description || '';
+      const branches: Record<string, string> = pkg.language_branches || {};
+      for (const language of LANGUAGE_OPTIONS) {
+        const checkbox = form.querySelector<HTMLInputElement>(
+          `input[name="languages"][value="${CSS.escape(language.slug)}"]`
+        );
+        const input = branchInput(language.slug);
+        const branch = branches[language.slug] || '';
+        if (checkbox) checkbox.checked = Boolean(branch);
+        if (input) input.value = branch;
+      }
+      syncLanguageInputs();
       const tags: string[] = pkg.tags || [];
       for (const t of tags) {
         const cb = form.querySelector<HTMLInputElement>(
@@ -175,13 +263,16 @@ import { TAG_GROUPS } from '~/lib/tags';
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const language_branches = collectLanguageBranches();
+    if (!language_branches) return;
     const data = new FormData(form);
     const payload = {
+      language_branches,
       description: data.get('description'),
       tags: data.getAll('tags') as string[],
     };
     status.classList.remove('hidden');
-    status.textContent = 'Saving…';
+    status.textContent = 'Saving (verifying branches)…';
     try {
       await pb.collection('packages').update(id, payload);
       status.textContent = 'Saved.';
