@@ -6,20 +6,18 @@
 }
 
 :80 {
-	encode gzip zstd
-
-	header {
-		X-Content-Type-Options "nosniff"
-		Referrer-Policy "strict-origin-when-cross-origin"
-		X-Frame-Options "SAMEORIGIN"
-	}
-
+	# ONCE's health check. This must stay a 200 and must be matched before the
+	# catch-all below, or the platform marks the app unhealthy and the deploy
+	# never completes.
 	handle /up {
 		header Content-Type "text/plain; charset=utf-8"
 		respond `OK` 200
 	}
 
+	# The marketplace is retired. Every other path permanently redirects to the
+	# main site, which is a single landing page — so there is no incoming path
+	# worth preserving, and forwarding one would only produce a second hop.
 	handle {
-		reverse_proxy localhost:8090
+		redir https://www.bigconfig.ai/ 301
 	}
 }

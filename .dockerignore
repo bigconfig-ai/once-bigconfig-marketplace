@@ -1,10 +1,6 @@
 .git
+.github
 .claude
 .envrc
 .DS_Store
-node_modules
-dist
-pocketbase/pb_data
-pocketbase/pb_public
-web/node_modules
-web/dist
+README.md

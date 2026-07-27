@@ -1,9 +1,4 @@
 .*
-!.envrc.example
 !.gitignore
 !.dockerignore
 !.github
-node_modules/
-dist/
-/pocketbase/pb_data/
-/pocketbase/pb_public/

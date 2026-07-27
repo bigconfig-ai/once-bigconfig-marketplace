@@ -1,2 +1,0 @@
-caddy: /usr/local/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
-litestream: /usr/local/bin/entrypoint.sh
